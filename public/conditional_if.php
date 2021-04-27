@@ -1,38 +1,29 @@
 <?php
-//if statement : this is a conditional statement which only works if the condition is true 
-$age = 25;
-// if($age >= 18){
-//   //code to be executed if the condition is true
-// 	echo "you can buy alcohol";
-// }
+//if , else , else if
+//if : execute code if condition is true
+$age = 30;
 
-//if else : differs from if in that it will check whether condition is true if not it will run a false block
-if ($age >= 18) {
-	# code...
-	echo "you can buy alcohol<br>";  
+if($age >= 18){
+  //code to be executed 
+	echo "you are allowed to drive<br>";
 } else {
-	echo "you are not above the age limit , do you want juice!<br>";
+	echo "too young to drive<br>";
 }
 
-$car = "volvo";
-//if .. elseif .. else : multiple condition checks 
-if ($car == "volvo") {
+$occupation = "software dev";
+
+if ($occupation == "teacher") {
 	# code...
-	$x = 5;
-	$y = 5;
-	echo $x + $y;
-} elseif ($car == "bmw") {
-	# code...
-		echo "right car<br>";
+	echo "administer vaccine";
+} elseif ($occupation == "doctor"){
+	echo "administer vaccine";
 
-} elseif ($car == "jeep"){
-	echo "right car<br>";
+} elseif ($occupation == "clergy"){
+	echo "administer vaccine";
 
-} elseif ($car == "benz"){
-	echo "right car<br>";
-
-} else  {
-    echo "car cannot be found<br>";
+} else {
+   echo "try another time";
 }
+
 
 ?>

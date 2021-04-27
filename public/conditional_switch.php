@@ -1,30 +1,27 @@
 <?php
-$examAnswer = "E";
+$occupation = 2;
 
-switch ($examAnswer) {
-	    case 'A':
-		# code...
-				echo "wrong answer<br>";
+switch($occupation){
 
-		break;
-	    case 'B':
-		# code...
-				echo "wrong answer<br>";
+  case 2:
+  //code to be executed
+  	echo "administer vaccine";
 
-		break;
-		case 'C':
-		# code...
-		      				echo "wrong answer<br>";
+  break;
 
-		break;
-		case 'D':
-		# code...
-		echo "right answer<br>";
-		break;
-	default:
-		# code...
-	    echo "selection not in choices";
-		break;
+  case 4:
+	echo "administer vaccine";
+
+  break;
+
+
+  default:
+	echo "group not found";
+
+  break;
+
+
+
 }
 
 
