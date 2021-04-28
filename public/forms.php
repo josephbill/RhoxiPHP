@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +19,23 @@
 $username = "";
 $idNumber = "";
 $office = "" ;
+$imageUploaded = "";
+$target_file = "";
+$target_dir = "";
 $usernameErr = $idNumberErr = $officeErr = "";
 
+//checking if file is uploaded (demo wise )
+$uploadOk = 1;
+//converting file extension to lowercase 
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 //listen for an event
 //to basically check if an event has happened we use the php in built method called isset()
 if (isset($_POST['save'])) { //checked if btn has been clicked 
+//upload variables 
+//directory to store uploads
+$target_dir = "../uploads/";
+//specify the path of the upload 
+$target_file = $target_dir . basename($_FILES['imageUpload']['name']);
 	# code...
 	//pick up the input 
 	//check if the inputs are empty or not 
@@ -50,16 +65,23 @@ if (isset($_POST['save'])) { //checked if btn has been clicked
 		$office = test_input($_POST['office']);
 	}
 
+  $imageUploaded = $_FILES['imageUpload']['tmp_name'];
+
 	if (empty($usernameErr) && empty($emailErr) && empty($officeErr)) {
 		# code...
-			echo "This person: " . $username . " of ID number: " . $idNumber . " is visiting office: " . $office;
+    if (move_uploaded_file($imageUploaded, $target_file) == TRUE) {
+      # code...
+      echo "This person: " . $username . " of ID number: " . $idNumber . " is visiting office: " . $office . " also image uploaded";
+    } else {
 
-	} else {
-		echo "data validation is not secured";
-	}
+			echo "image has not been uploaded";
 
+	} 
+    } else {
+    echo "data validation is not secured";
+  }
 
-}
+  }
 
 
 function test_input($data){
@@ -82,9 +104,20 @@ function test_input($data){
    	   <div class="container">
    	   	   <div class="row">
    	   	   	    <div class="col">
+   <?php
+    if (isset($_SESSION['favColor'])) {
+      # code...
+         echo "Favourite color is " . $_SESSION['favColor'] . " fav name is " . $_SESSION['favName'];
+       session_unset();
+           session_destroy();
+    } else {
+
+      echo "";
+    }
+    ?>                  <br>
    	   	   	    	<h3>Welcome to RX Building</h3>
    	   	   	    	<hr>
-   	   	   	    	<form action="forms.php" method="post">
+   	   	   	    	<form action="forms.php" method="post" enctype="multipart/form-data">
    	   	   	    		<div class="form-group">
    	   	   	    			<input type="text" name="username" class="form-control" placeholder="Enter Full Name"  >
    	   	   	    			<p><?php echo $usernameErr; ?></p>
@@ -103,7 +136,11 @@ function test_input($data){
 
    	   	   	    		</div>
    	   	   	    		   	   	   	    		<br>
-
+                    <div class="form-group"> 
+                      <label>Upload File</label>
+                      <input type="file" name="imageUpload" class="form-control" multiple="">
+                    </div>
+                                         <br>
    	   	   	    		<div>
    	   	   	    			<input type="submit" name="save" class="btn btn-primary btn-block" value="Submit Data">
    	   	   	    			<br>
